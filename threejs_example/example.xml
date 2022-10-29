@@ -1,0 +1,36 @@
+<krpano>
+
+	<!-- add WebVR support -->
+	<include url="%SWFPATH%/plugins/webvr.xml" />
+	
+	<!-- adjust settings from the webvr.xml: fake mobilevr support, no vr cursor -->
+	<plugin name="WebVR" mobilevr_fake_support="true" vr_cursor="" />
+
+
+	<!-- the pano image -->
+	<preview url="pano.tiles/preview.jpg" />
+
+	<image type="CUBE" multires="true" tilesize="512">
+		<level tiledimagewidth="1536" tiledimageheight="1536">
+			<cube url="pano.tiles/%s_%v_%h.jpg" />
+		</level>
+	</image>
+
+	<!-- startup view -->
+	<view hlookat="-85" vlookat="0" fov="90" />
+	
+	<!-- disable mipmapping - can be a little bit sharper in VR -->
+	<display mipmapping="off" />
+	
+	<!-- add a contextmenu item for changing the pano control mode -->
+	<contextmenu>
+		<item name="kr" caption="KRPANO" />
+		<item name="fs" caption="FULLSCREEN" />
+		<item name="cc" caption="Change Controlmode" onclick="switch(control.mousetype,moveto,drag); switch(control.touchtype,moveto,drag);" separator="true" />
+	</contextmenu>
+
+
+	<!-- add the custom ThreeJS plugin -->
+	<plugin name="threejs" url="three.krpanoplugin.js" keep="true" />
+
+</krpano>
